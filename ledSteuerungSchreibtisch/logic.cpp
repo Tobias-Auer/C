@@ -24,10 +24,12 @@ int getPotiValues() {
 
   if (raw < 550) {
     raw = 550;
-  } else if (raw > 970) {
-    raw = 970;
+  } 
+  else if (raw > 985) {
+    raw = 985;
   }
-  oldValue = map(raw, 550, 970, 0, 255);
+  oldValue = map(raw, 550, 985, 0, 255);
+  globalPotiValue = raw;
   return oldValue;
 }
 

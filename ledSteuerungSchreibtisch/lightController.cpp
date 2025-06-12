@@ -4,6 +4,8 @@ uint8_t oldBrightness = 0;
 uint8_t brightness = 0;
 bool lightIsOn = true;
 
+int globalPotiValue = 0;
+
 void changeLightState(uint8_t state) {
   Serial.print(("RECEIVED: "));
   Serial.println(state);

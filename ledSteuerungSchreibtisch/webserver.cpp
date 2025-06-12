@@ -4,10 +4,10 @@
 
 
 ESP8266WebServer server(80);
-
+ESP8266HTTPUpdateServer httpUpdater;
 
 void handleJsonReturn() {
-String json = String("{\"bri\": ") + brightness + ", \"on\":" + lightIsOn + "}";
+String json = String("{\"bri\": ") + brightness + ", \"on\":" + lightIsOn + ", \"val\":" + globalPotiValue + "}";
   server.send(200, "application/json", json);
 }
 
@@ -35,6 +35,8 @@ void handleRoot() {
 
 
 void setupWebServer() {
+  httpUpdater.setup(&server);
+
   server.on("/", handleRoot);
   // server.on("/win", handleWin);                // /win&T=0/1/2         /win&A=128
   server.on("/json/state", handleJsonReturn);  //{"on": true, "bri": 128}

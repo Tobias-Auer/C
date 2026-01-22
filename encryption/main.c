@@ -24,7 +24,7 @@ int charToNum(char c) {
     return -1;
 }
 
-void printDecrypt(char input[256]) {
+void printEncrypt(char input[256]) {
     for(size_t i = 0; i < strlen(input); i++) {
         int code = charToNum(input[i]);
         

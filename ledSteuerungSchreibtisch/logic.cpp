@@ -11,12 +11,19 @@ bool lastAccessSourceWeb = false;
 int getPotiValues() {
   static unsigned long aboveThresholdStart = 0;
   static bool unlocked = false;
-  const int threshold = 550;
+  const int threshold = 570;
   const unsigned long unlockDelay = 500;  // milliseconds
   int raw = analogRead(A0);
   Serial.println(raw);
 
   unsigned long now = millis();
+  if (webOverride) {
+    // Require a larger change to unlock when overridden by the web API
+    if (abs(oldRaw - raw) < 50) {
+      return brightness; // Maintain current brightness
+    }
+    webOverride = false; // Reset override once a significant change is detected
+  }
 
   // --- Lock/unlock logic ---
   if (raw < threshold) {
@@ -56,15 +63,16 @@ int getPotiValues() {
   lastAccessSourceWeb = false;
   oldRaw = raw;
 
-  if (raw < 550) raw = 550;
+  if (raw < threshold) raw = 550;
   else if (raw > 985) raw = 985;
 
   oldValue = map(raw, 550, 985, 0, 255);
   globalPotiValue = raw;
   return oldValue;
+
+
+
 }
-
-
 
 std::map<String, String> parseParams(const String& uri) {
   std::map<String, String> params;

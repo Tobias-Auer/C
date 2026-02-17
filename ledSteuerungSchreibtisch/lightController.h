@@ -8,5 +8,7 @@ extern bool lightIsOn;
 
 extern int globalPotiValue;
 
+extern bool webOverride;
+
 void changeBrightness(uint8_t brightnessValue);
 void changeLightState(uint8_t state);

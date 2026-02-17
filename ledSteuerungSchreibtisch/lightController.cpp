@@ -1,5 +1,5 @@
 #include "lightController.h"
-
+bool webOverride = false;
 uint8_t oldBrightness = 0;
 uint8_t brightness = 0;
 bool lightIsOn = true;
@@ -12,6 +12,7 @@ void changeLightState(uint8_t state) {
   switch (state) {
     case 0:
       lightIsOn = false;
+      webOverride = true; // Set override when turned off via web API
       break;
     case 1:
       lightIsOn = true;
@@ -36,7 +37,7 @@ void changeBrightness(uint8_t brightnessLevel) {
       analogWrite(ledOut, brightness);
   } else {
     analogWrite(ledOut, 0);
-    Serial.println("OFFFFFFFFFFFFFFFFFFFFFF");
+    Serial.println("OFF");
   }
 }
 

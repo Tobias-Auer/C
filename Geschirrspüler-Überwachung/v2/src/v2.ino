@@ -5,7 +5,7 @@
 #include <ArduinoJson.h>
 #include <base64.h>
 #include <ESP8266HTTPClient.h>
-
+bool sendHTTPRequest(String actionName);
 const int enterSetupPin = 4;
 const int adcPin = A0;
 
